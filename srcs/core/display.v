@@ -43,7 +43,7 @@ module display(
       else
         m<=m+1;
     end
-    //·ÖÆµµÃµ½400HzÊ±ÖÓ
+    //åˆ†é¢‘å¾—åˆ°400Hzæ—¶é’Ÿ
     
     always @(posedge clk)
     begin
@@ -155,6 +155,6 @@ module display(
       
       endcase;
     end
-    //¶¯Ì¬ÏÔÊ¾£¬Ñ¡ÖÐµÄÊý×Ö»á³ÖÐøÉÁË¸
+    //ï¿½ï¿½Ì¬ï¿½ï¿½Ê¾ï¿½ï¿½Ñ¡ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¸
     
 endmodule
