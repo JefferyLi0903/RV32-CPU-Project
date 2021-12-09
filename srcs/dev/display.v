@@ -21,7 +21,10 @@
 
 
 module display(
-    input [3:0]x,
+    input [3:0]x1,
+    input [3:0]x2,
+    input [3:0]x3,
+    input [3:0]x4,
     input clock,
     input [3:0]switch,
     output reg [7:0]seg,
@@ -62,7 +65,7 @@ module display(
         sw<=4'b1110;
         if(show||!switch[0])
         begin
-        case(x[0])
+        case(x1)
         4'b0000:seg<=8'b11000000;
         4'b0001:seg<=8'b11111001;
         4'b0010:seg<=8'b10100100;
@@ -86,7 +89,7 @@ module display(
         sw<=4'b1101;
         if(show||!switch[1])
         begin
-        case(x[1])
+        case(x2)
         4'b0000:seg<=8'b11000000;
         4'b0001:seg<=8'b11111001;
         4'b0010:seg<=8'b10100100;
@@ -110,7 +113,7 @@ module display(
         sw<=4'b1011;
         if(show||!switch[2])
         begin
-        case(x[2])
+        case(x3)
         4'b0000:seg<=8'b01000000;
         4'b0001:seg<=8'b01111001;
         4'b0010:seg<=8'b00100100;
@@ -135,7 +138,7 @@ module display(
         sw<=4'b0111;
         if(show||!switch[3])
         begin
-        case(x[3])
+        case(x4)
         4'b0000:seg<=8'b11000000;
         4'b0001:seg<=8'b11111001;
         4'b0010:seg<=8'b10100100;
@@ -155,6 +158,6 @@ module display(
       
       endcase;
     end
-    //��̬��ʾ��ѡ�е����ֻ������˸
+    //动态显示，选中的数字会持续闪烁
     
 endmodule

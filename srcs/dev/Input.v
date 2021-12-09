@@ -3,38 +3,40 @@ module Input(
     input rst,
     input [3:0] sw,
     input [1:0] button,
-    output reg [3:0]x
+    output reg [3:0]x1,x2,x3,x4
     );
     
-    reg [1:0]button1=2'b00;
+    wire [1:0]button1;
+    reg [19:0]m=0;
     
-    shake(rst,clk,button[0],button1[0]);
-    shake(rst,clk,button[1],button1[1]);
+    shake uut1(rst,clk,button[0],button1[0]);
+    shake uut2(rst,clk,button[1],button1[1]);
     //防抖模块
     
     always @(posedge clk)
     begin
     if(rst)
-      x<=4'b0;
-    else
+      {x1,x2,x3,x4}<=16'b0;
+    else if(m==19'd120)
       begin
+      m<=0;
       case(sw[3:0])
       4'b0001:
         begin
         case(button1)
         2'b01:
         begin
-        if(x[0]==9)
-        x[0]<=x[0];
+        if(x1==4'd9)
+        x1<=x1;
         else
-        x[0]<=x[0]+1;
+        x1<=x1+1;
         end
         2'b10:
         begin
-        if(x[0]==0)
-        x[0]<=x[0];
+        if(x1==0)
+        x1<=x1;
         else
-        x[0]<=x[0]-1;
+        x1<=x1-1;
         end
         default;
         endcase
@@ -45,17 +47,17 @@ module Input(
         case(button1)
         2'b01:
         begin
-        if(x[1]==9)
-        x[1]<=x[1];
+        if(x2==4'd9)
+        x2<=x2;
         else
-        x[1]<=x[1]+1;
+        x2<=x2+1;
         end
         2'b10:
         begin
-        if(x[1]==0)
-        x[1]<=x[1];
+        if(x2==0)
+        x2<=x2;
         else
-        x[1]<=x[1]-1;
+        x2<=x2-1;
         end
         default;
         endcase
@@ -66,17 +68,17 @@ module Input(
         case(button1)
         2'b01:
         begin
-        if(x[2]==9)
-        x[2]<=x[2];
+        if(x3==4'd9)
+        x3<=x3;
         else
-        x[2]<=x[2]+1;
+        x3<=x3+1;
         end
         2'b10:
         begin
-        if(x[2]==0)
-        x[2]<=x[2];
+        if(x3==0)
+        x3<=x3;
         else
-        x[2]<=x[2]-1;
+        x3<=x3-1;
         end
         default;
         endcase
@@ -87,17 +89,17 @@ module Input(
         case(button1)
         2'b01:
         begin
-        if(x[3]==9)
-        x[3]<=x[3];
+        if(x4==4'd9)
+        x4<=x4;
         else
-        x[3]<=x[3]+1;
+        x4<=x4+1;
         end
         2'b10:
         begin
-        if(x[3]==0)
-        x[3]<=x[3];
+        if(x4==4'd0)
+        x4<=x4;
         else
-        x[3]<=x[3]-1;
+        x4<=x4-1;
         end
         default;
         endcase
@@ -105,6 +107,8 @@ module Input(
       default;  
       endcase
       end
+      else
+      m<=m+1;
     end
     //根据开关选择改变的位数，用按钮对该位进行加1或者减1
     
