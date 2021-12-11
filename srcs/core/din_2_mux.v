@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 2021/12/08 23:27:09
+// Create Date: 2021/12/11 19:42:57
 // Design Name: 
-// Module Name: ext32
+// Module Name: din_2_mux
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,10 +20,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module ext32 #(parameter N = 12)(
-	input [N-1:0]imm,    //待扩展的立即数
-	output [31:0]ext_imm //已扩展的立即数
-);
-
-	assign ext_imm = {{(32-N){imm[N-1]}},imm};
+module din_2_mux(
+    input [31:0] ext_imm,
+    input [31:0] din_2i,
+    output reg [31:0] din_2,
+    input sel,
+    input clk
+    );
+    always@(negedge clk) din_2 <= sel ? din_2i : ext_imm;
 endmodule

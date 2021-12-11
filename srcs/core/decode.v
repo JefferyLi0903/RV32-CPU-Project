@@ -21,6 +21,25 @@
 
 
 module decode(
-
+    input [31:0] instr,
+    output reg [19:0] imm,
+    output [4:0] rs1,
+    output [4:0] rs2,
+    output [4:0] rd,
+    output [6:0] op,
+    output [2:0] func
     );
+    assign op = instr[6:0] ;
+    assign rd = instr[11:7] ;
+    assign rs1 = instr[19:15] ;
+    assign rs2 = instr[24:20] ;
+    assign func = instr[14:12] ;
+    always@(*) 
+    begin
+        if((op=='h3)||(op=='h13)) imm=instr[31:20];
+        else if(op=='h23||'h67) imm={instr[31:25],instr[11:7]};
+        else if(op=='h63) imm={instr[31],instr[7],instr[30:25],instr[11:8]};
+        else if(op=='h6F) imm={instr[31],instr[19:12],instr[20],instr[30:21]};
+        else if(op=='h37||'h17) imm=instr[31:12];
+    end
 endmodule
