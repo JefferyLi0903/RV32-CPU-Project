@@ -151,3 +151,10 @@
 //AND
 `define AND_MASK 32'hFE00_707F
 `define AND 32'h7033
+//MUL
+`define MUL_MASK 32'hFE00_707F
+`define MUL 32'h0200_0033
+//DIV
+`define DIV_MASK 32'hFE00_707F
+`define DIV 32'h0200_1033
+
