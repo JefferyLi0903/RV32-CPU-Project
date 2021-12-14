@@ -46,7 +46,7 @@ module display(
       else
         m<=m+1;
     end
-    //鍒嗛寰楀埌400Hz鏃堕挓
+    //分频得到400Hz时钟
     
     always @(posedge clk)
     begin
@@ -114,31 +114,6 @@ module display(
         if(show||!switch[2])
         begin
         case(x3)
-        4'b0000:seg<=8'b01000000;
-        4'b0001:seg<=8'b01111001;
-        4'b0010:seg<=8'b00100100;
-        4'b0011:seg<=8'b00110000;
-        4'b0100:seg<=8'b00011001;
-        4'b0101:seg<=8'b00010010;
-        4'b0110:seg<=8'b00000010;
-        4'b0111:seg<=8'b01111000;
-        4'b1000:seg<=8'b00000000;
-        4'b1001:seg<=8'b00010000;
-        default;
-        endcase;
-        end
-        else
-        seg<=8'b01111111;
-        
-      end
-      
-      4'b1000:
-      begin
-        sw1<=4'b0001;
-        sw<=4'b0111;
-        if(show||!switch[3])
-        begin
-        case(x4)
         4'b0000:seg<=8'b11000000;
         4'b0001:seg<=8'b11111001;
         4'b0010:seg<=8'b10100100;
@@ -154,10 +129,35 @@ module display(
         end
         else
         seg<=8'b11111111;
+        
+      end
+      
+      4'b1000:
+      begin
+        sw1<=4'b0001;
+        sw<=4'b0111;
+        if(show||!switch[3])
+        begin
+        case(x4)
+        4'b0000:seg<=8'b01000000;
+        4'b0001:seg<=8'b01111001;
+        4'b0010:seg<=8'b00100100;
+        4'b0011:seg<=8'b00110000;
+        4'b0100:seg<=8'b00011001;
+        4'b0101:seg<=8'b00010010;
+        4'b0110:seg<=8'b00000010;
+        4'b0111:seg<=8'b01111000;
+        4'b1000:seg<=8'b00000000;
+        4'b1001:seg<=8'b00010000;
+        default;
+        endcase;
+        end
+        else
+        seg<=8'b01111111;
       end
       
       endcase;
     end
-    //鍔ㄦ�佹樉绀猴紝閫変腑鐨勬暟瀛椾細鎸佺画闂儊
+    //动态显示，选中的数字会持续闪烁
     
 endmodule
