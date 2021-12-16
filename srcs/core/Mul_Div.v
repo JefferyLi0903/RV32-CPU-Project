@@ -20,9 +20,82 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Mul_Div(
-    input instr[31:0],
-    output dout[31:0]
+module Mul(
+    input [31:0] a,
+    input [31:0] b,
+    output reg [31:0] c
     );
-    if(instr&`MUL_MASK)
+    reg [31:0] tmp [63:0];
+    reg [63:0] sum=0;
+    integer i;
+    generate
+        always@(*)
+        begin
+            for(i=0;i<32;i=i+1)
+            begin
+                if(b[i]) tmp[i]=a << i;
+                else tmp[i]=0;
+            end
+            sum = tmp[0]+
+            tmp[1]+
+            tmp[2]+
+            tmp[3]+
+            tmp[4]+
+            tmp[5]+
+            tmp[6]+
+            tmp[7]+
+            tmp[8]+
+            tmp[9]+
+            tmp[10]+
+            tmp[11]+
+            tmp[12]+
+            tmp[13]+
+            tmp[14]+
+            tmp[15]+
+            tmp[16]+
+            tmp[17]+
+            tmp[18]+
+            tmp[19]+
+            tmp[20]+
+            tmp[21]+
+            tmp[22]+
+            tmp[23]+
+            tmp[24]+
+            tmp[25]+
+            tmp[26]+
+            tmp[27]+
+            tmp[28]+
+            tmp[29]+
+            tmp[30]+
+            tmp[31];
+            c = sum>>31;
+        end
+    endgenerate
 endmodule
+
+module Div(
+    input clk,
+    input [31:0] a,
+    input [31:0] b,
+    output wire [31:0] c
+);  
+    wire [63:0] d;
+    assign aclk =clk;
+    assign s_axis_divisor_tdata = a;
+    assign s_axis_dividend_tdata = b;
+    assign s_axis_divisor_tvalid =1;
+    assign s_axis_dividend_tvalid =1;
+    assign d=m_axis_dout_tdata;
+    assign c=d[63:32];
+    div_gen_0 divider (
+        .aclk(aclk),                                      // input wire aclk
+        .s_axis_divisor_tvalid(s_axis_divisor_tvalid),    // input wire s_axis_divisor_tvalid
+        .s_axis_divisor_tdata(s_axis_divisor_tdata),      // input wire [31 : 0] s_axis_divisor_tdata
+        .s_axis_dividend_tvalid(s_axis_dividend_tvalid),  // input wire s_axis_dividend_tvalid
+        .s_axis_dividend_tdata(s_axis_dividend_tdata),    // input wire [31 : 0] s_axis_dividend_tdata
+        .m_axis_dout_tvalid(m_axis_dout_tvalid),          // output wire m_axis_dout_tvalid
+        .m_axis_dout_tdata(m_axis_dout_tdata)            // output wire [63 : 0] m_axis_dout_tdata
+      );
+endmodule
+
+    
