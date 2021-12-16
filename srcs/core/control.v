@@ -33,4 +33,5 @@ module control(
     assign sw_en =(instr&`SW_MASK==`SW)? 1'b1:1'b0;
     assign wr_en =(instr[6:0]=='b0110111||'b0010111||'b1101111||'b1100111||'b0000011||'b0010011)? 1'b1:1'b0;
     assign sub_en =(instr&`SUB_MASK==`SUB)? 1'b1:1'b0;
+
 endmodule

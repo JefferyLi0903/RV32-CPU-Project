@@ -21,6 +21,8 @@
 
 
 module Mul_Div(
-
+    input instr[31:0],
+    output dout[31:0]
     );
+    if(instr&`MUL_MASK)
 endmodule
