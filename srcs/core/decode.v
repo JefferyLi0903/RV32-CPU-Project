@@ -27,8 +27,10 @@ module decode(
     output [4:0] rs2,
     output [4:0] rd,
     output [6:0] op,
-    output [2:0] func
+    output [2:0] func,
+    output [6:0] op_2
     );
+    assign op_2=instr[31:25];
     assign op = instr[6:0] ;
     assign rd = instr[11:7] ;
     assign rs1 = instr[19:15] ;
