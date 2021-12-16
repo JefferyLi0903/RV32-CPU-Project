@@ -22,8 +22,10 @@
 
 module turn(
     input clk,
-    input [16:0] x,
+    input [19:0] x,
     input clr,
+    input y,
+    output reg x0,
     output reg [3:0]x1,
     output reg [3:0]x2,
     output reg [3:0]x3,
@@ -31,14 +33,15 @@ module turn(
     output reg [3:0]x5
     );
     
-    reg [36:0]count=0;
+    reg [43:0]count=0;
     reg [4:0]count1=0;
+    reg [3:0]x6=0;
     
     always @(posedge clk)
     begin
       if(clr)
         count1<=0;
-      else if(count1==5'd18)
+      else if(count1==5'd21)
         count1<=0;
       else
         count1<=count1+1;
@@ -49,19 +52,21 @@ module turn(
       if(clr)
         count<=0;
       else if(count1==0)
-        count<={20'h00000,x};
-      else if(count1<=17)
+        count<={24'h000000,x};
+      else if(count1<=20)
         begin
-          if(count[20:17]>=5)
-            count[20:17]<=count[20:17]+2'd3;
-          if(count[24:21]>=5)
-            count[24:21]<=count[24:21]+2'd3;
-          if(count[28:25]>=5)
-            count[28:25]<=count[28:25]+2'd3;
-          if(count[32:29]>=5)
-            count[32:29]<=count[32:29]+2'd3;
-          if(count[36:33]>=5)
-            count[36:33]<=count[36:33]+2'd3;
+          if(count[23:20]>=5)
+            count[23:20]<=count[23:20]+2'd3;
+          if(count[27:24]>=5)
+            count[27:24]<=count[27:24]+2'd3;
+          if(count[31:28]>=5)
+            count[31:28]<=count[31:28]+2'd3;
+          if(count[35:32]>=5)
+            count[35:32]<=count[35:32]+2'd3;
+          if(count[39:36]>=5)
+            count[39:36]<=count[39:36]+2'd3;
+          if(count[43:40]>=5)
+            count[43:40]<=count[43:40]+2'd3;
           count=count<<1;
         end
     end
@@ -69,9 +74,42 @@ module turn(
     always @(posedge clk)
     begin
       if(clr)
-        {x1,x2,x3,x4,x5}<=0;
-      else if(count1==5'd18)
-        {x1,x2,x3,x4,x5}<=count[36:17];
+        {x1,x2,x3,x4,x5,x6}<=0;
+      else if(count1==5'd21)
+      begin
+        {x1,x2,x3,x4,x5,x6}<=count[43:20];
+        x0<=y;
+        if(x6>=4'd5)
+        begin
+        if(x5<4'd9)
+          x5<=x5+1;
+        else if(x4<4'd9)
+          begin
+            x5<=0;
+            x4<=x4+1;
+          end
+        else if(x3<4'd9)
+          begin
+            {x4,x5}<=0;
+            x3<=x3+1;
+          end
+        else if(x2<4'd9)
+          begin
+            {x3,x4,x5}<=0;
+            x2<=x2+1;
+          end
+        else if(x1<4'd9)
+          begin
+            {x2,x3,x4,x5}<=0;
+            x1<=x1+1;
+          end
+        else
+          begin
+          {x1,x2,x3,x4,x5}<=0;
+          x0<=1;
+          end
+        end
+      end
     end
    
 endmodule
