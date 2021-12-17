@@ -18,10 +18,10 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
+//! ALU
 
 module ALU(
-    input aclk,
+    input aclk, //! 这是一个供除法器使用的高速时钟信号, 建议接入尽可能高的时钟信号. 
     input [6:0] op,
     input [6:0] op_2,
     input [2:0] func,
@@ -32,7 +32,7 @@ module ALU(
     );
     wire [31:0]Mul_r;
     wire [31:0]Div_r;
-    Mul MUL(din1,din2,Mul_r);
+    Mul MUL(din1,din2,Mul_r); 
     Div DIV(aclk,din1,din2,Div_r);
     wire [4:0] shamt = din2[4:0];
     always@(*)

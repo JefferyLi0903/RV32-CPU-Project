@@ -18,11 +18,11 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
+//! 立即数扩展器
 
 module ext32 #(parameter N = 12)(
-	input [N-1:0]imm,    //待扩展的立即数
-	output [31:0]ext_imm //已扩展的立即数
+	input [N-1:0]imm,    //! 待扩展的立即数
+	output [31:0]ext_imm //! 已扩展的立即数
 );
 
 	assign ext_imm = {{(32-N){imm[N-1]}},imm};

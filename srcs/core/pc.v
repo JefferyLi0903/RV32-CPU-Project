@@ -18,17 +18,17 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
+//! 程序计数器，用于驱动指令地址（当碰到JAL指令时，打开跳转使能端口）
 
 module pc(
     input clk,
     input rst,
-    input offset_en,
-    input [31:0] offset,
+    input offset_en, //! 跳转使能端口
+    input [31:0] offset, //! 直接接入ext32的立即数
     output reg [31:0] addr=0
     );
     always@(negedge clk or posedge rst)
-    begin
+    begin: counter
         if(rst) addr<=0;
         else if(offset_en) addr<=offset;
         else addr<=addr+4;

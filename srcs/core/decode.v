@@ -18,17 +18,17 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
+//! 解码器
 
 module decode(
-    input [31:0] instr,
-    output reg [19:0] imm,
-    output [4:0] rs1,
-    output [4:0] rs2,
-    output [4:0] rd,
-    output [6:0] op,
-    output [2:0] func,
-    output [6:0] op_2
+    input [31:0] instr, 
+    output reg [19:0] imm, //! 请接入ext32以扩展
+    output [4:0] rs1, //! 请接入寄存器地址
+    output [4:0] rs2, //! 请接入寄存器地址
+    output [4:0] rd,  //! 请接入寄存器地址
+    output [6:0] op,  //! 请接入ALU
+    output [2:0] func, //! 请接入ALU
+    output [6:0] op_2 //! 请接入ALU
     );
     assign op_2=instr[31:25];
     assign op = instr[6:0] ;
