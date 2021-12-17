@@ -19,3 +19,4 @@
 | sub_en    | output    |        | 请接入ALU                                 |
 | wr_en     | output    |        | 请接入寄存器                                 |
 | offset_en | output    |        | 请接入PC                                  |
+| mux_sel   | output    |        | 用于JAL命令将地址写入RAM的指令                     |
