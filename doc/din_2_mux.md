@@ -6,26 +6,9 @@
 ![Diagram](din_2_mux.svg "Diagram")
 ## Description
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  数据选择器,在ALU的din2 之前使用.  
+
+同时也需要在RAM的input端使用，用于选择是否直接读入PC地址。
 
 ## Ports
 
@@ -36,6 +19,7 @@
 | din_2     | output    | [31:0] |             |
 | sel       | input     |        |             |
 | clk       | input     |        |             |
+
 ## Processes
 - unnamed: ( @(negedge clk) )
   - **Type:** always
