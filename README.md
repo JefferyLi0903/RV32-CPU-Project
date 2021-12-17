@@ -46,4 +46,4 @@ https: https://github.com/JefferyLi0903/riscv-assembler.git
 3. https://blog.csdn.net/qq_40697071/article/details/103340205
 4. https://yangfan.blog.csdn.net/article/details/103353982?spm=1001.2101.3001.6650.19&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-19.fixedcolumn&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-19.fixedcolumn
 5. https://blog.csdn.net/kubidaolun/article/details/113360009?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-2.fixedcolumn&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7Edefault-2.fixedcolumn
-6. [中文版指令集文档](./docs/RISC-V-Reader-Chinese-v2p1.pdf)
+6. [中文版指令集文档](./doc/RISC-V-Reader-Chinese-v2p1.pdf)
