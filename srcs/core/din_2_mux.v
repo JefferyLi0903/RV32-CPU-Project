@@ -24,7 +24,7 @@ module din_2_mux(
     input [31:0] ext_imm,
     input [31:0] din_2i,
     output reg [31:0] din_2,
-    input sel,
+    input sel, //! 请接入Instr第6位的非
     input clk
     );
     always@(negedge clk) din_2 <= sel ? din_2i : ext_imm;
