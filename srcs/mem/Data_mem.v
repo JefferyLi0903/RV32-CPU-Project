@@ -39,25 +39,20 @@ module Data_mem(
 	always@(lw_en)
 		if(lw_en)
 		begin
-			data_mem[7:0] <= data[addr+3];
-			data_mem[15:8] <= data[addr+2];
-			data_mem[23:16] <= data[addr+1];
-			data_mem[31:24] <= data[addr];
+		  data_mem[7:0] <= data[addr+3];
+		  data_mem[15:8] <= data[addr+2];
+		  data_mem[23:16] <= data[addr+1];
+		  data_mem[31:24] <= data[addr];
 		end
-	
-
-
-
-
-	
+		
 	always@(negedge clk)
 	  begin
 		if(sw_en)
 		begin
-			data[addr+3] <= data2[7:0];
-			data[addr+2] <= data2[15:8];
-			data[addr+1] <= data2[23:16];
-			data[addr] <= data2[31:24];
+	      data[addr+3] <= data2[7:0];
+          data[addr+2] <= data2[15:8];
+		  data[addr+1] <= data2[23:16];
+		  data[addr] <= data2[31:24];
 		end
 		
 	    data[18]<={x1,x2,21'o0000000};
@@ -66,6 +61,5 @@ module Data_mem(
 	    y2<=data_out[30:10];
       end
 		
-
 endmodule 
 
