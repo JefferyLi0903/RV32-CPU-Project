@@ -22,28 +22,28 @@
 
 module Data_mem(
 	input clk,
-	input [31:0]addr,
-	input [31:0]data2,
+	input [31:0]addr,//地址
+	input [31:0]data2,//写入RAM的数据
 	input lw_en,
 	input sw_en,
-	input x1,
-	input [9:0]x2,
-	output reg y1,
-	output reg [19:0]y2,
-	output reg [31:0]data_mem
+	input x1,//输入数据的整数部分
+	input [9:0]x2,//输入数据的小数部分
+	output reg y1,//输出数据的整数部分
+	output reg [19:0]y2,//输出数据的小数部分
+	output reg [31:0]data_mem//从RAM中读出的数据
 );
 
 	reg [31:0]data[0:255];
 	reg [31:0]data_out;
 	
-	always@(lw_en)
+    always@(lw_en)
 	  if(lw_en)
 	    begin
 	      data_mem<=data[addr];
 	    end
 		
-	always@(negedge clk)
-	  begin
+    always@(negedge clk)
+      begin
 	    if(sw_en)
 	      data[addr]<=data2;
 		
