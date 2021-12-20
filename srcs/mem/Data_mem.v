@@ -37,15 +37,15 @@ module Data_mem(
 	reg [31:0]data_out;
 	
 	always@(lw_en)
-		if(lw_en)
-		begin
-		  data_mem<=data[addr];
-		end
+	  if(lw_en)
+	    begin
+	      data_mem<=data[addr];
+	    end
 		
 	always@(negedge clk)
 	  begin
-		if(sw_en)
-		  data[addr]<=data2;
+	    if(sw_en)
+	      data[addr]<=data2;
 		
 	    data[18]<={x1,x2,21'o0000000};
 	    data_out<=data[19];
