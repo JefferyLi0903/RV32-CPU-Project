@@ -21,7 +21,7 @@
 
 
 module display(
-    input [3:0]x1,
+    input x1,
     input [3:0]x2,
     input [3:0]x3,
     input [3:0]x4,
@@ -66,16 +66,8 @@ module display(
         if(show||!switch[0])
         begin
         case(x1)
-        4'b0000:seg<=8'b11000000;
-        4'b0001:seg<=8'b11111001;
-        4'b0010:seg<=8'b10100100;
-        4'b0011:seg<=8'b10110000;
-        4'b0100:seg<=8'b10011001;
-        4'b0101:seg<=8'b10010010;
-        4'b0110:seg<=8'b10000010;
-        4'b0111:seg<=8'b11111000;
-        4'b1000:seg<=8'b10000000;
-        4'b1001:seg<=8'b10010000;
+        1'b0:seg<=8'b11000000;
+        1'b1:seg<=8'b11111001;
         default;
         endcase;
         end
