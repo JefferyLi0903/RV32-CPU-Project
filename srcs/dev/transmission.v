@@ -28,6 +28,7 @@ module transmission(
     input rst,
     input clk,
     input button,
+    output reg start,
     output reg y1,
     output reg [3:0] y2,
     output reg [3:0] y3,
@@ -37,6 +38,14 @@ module transmission(
     wire button1;
     
     shake uut(rst,clk,button,button1);
+    
+    always @(posedge clk)
+    begin
+      if(button1)
+      start<=1;
+      else
+      start<=0;
+    end
     
     always @(posedge button1,posedge rst)
     begin
