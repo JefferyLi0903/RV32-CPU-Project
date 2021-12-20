@@ -21,14 +21,14 @@
 
 
 module transmission(
-    input [3:0] x1,
+    input x1,
     input [3:0] x2,
     input [3:0] x3,
     input [3:0] x4,
     input rst,
     input clk,
     input button,
-    output reg [3:0] y1,
+    output reg y1,
     output reg [3:0] y2,
     output reg [3:0] y3,
     output reg [3:0] y4
