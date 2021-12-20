@@ -1,9 +1,32 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 2021/12/09 19:32:12
+// Design Name: 
+// Module Name: Input
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
 module Input(
     input clk,
     input rst,
     input [3:0] sw,
     input [1:0] button,
-    output reg [3:0]x1,x2,x3,x4
+    output reg x1,
+    output reg [3:0]x2,x3,x4
     );
     
     wire [1:0]button1;
@@ -11,12 +34,12 @@ module Input(
     
     shake uut1(rst,clk,button[0],button1[0]);
     shake uut2(rst,clk,button[1],button1[1]);
-    //é˜²æŠ–æ¨¡å—
+    //·À¶¶Ä£¿é
     
     always @(posedge clk)
     begin
     if(rst)
-      {x1,x2,x3,x4}<=16'b0;
+      {x1,x2,x3,x4}<=13'b0;
     else if(m==19'd120)
       begin
       m<=0;
@@ -26,7 +49,7 @@ module Input(
         case(button1)
         2'b01:
         begin
-        if(x1==4'd9)
+        if(x1==4'd1)
         x1<=x1;
         else
         x1<=x1+1;
@@ -110,6 +133,6 @@ module Input(
       else
       m<=m+1;
     end
-    //æ ¹æ®å¼€å…³é€‰æ‹©æ”¹å˜çš„ä½æ•°ï¼Œç”¨æŒ‰é’®å¯¹è¯¥ä½è¿›è¡ŒåŠ 1æˆ–è€…å‡1
+    //¸ù¾İ¿ª¹ØÑ¡Ôñ¸Ä±äµÄÎ»Êı£¬ÓÃ°´Å¥¶Ô¸ÃÎ»½øĞĞ¼Ó1»òÕß¼õ1
     
 endmodule
