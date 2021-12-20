@@ -23,7 +23,8 @@
 module VGA(
     input clk,
     input clr,
-    input [3:0]x1,x2,x3,x4,x5,x6,
+    input x1,
+    input [3:0]x2,x3,x4,x5,x6,
     output [3:0] r1,
     output [3:0] g1,
     output [3:0] b1,
@@ -100,7 +101,7 @@ module VGA(
     always @(posedge vga_clk)
     begin
     case(x1)
-    4'd0:
+    1'd0:
     begin
       if(((x>9)&&(x<=9+width)&&y>169&&y<=309)||
       ((x>79-width)&&(x<=79)&&y>169&&y<=309)||
@@ -111,7 +112,7 @@ module VGA(
         {r,g,b}<=12'b0;
     end
     
-    4'd1:
+    1'd1:
     begin
       if(((x>79-width)&&(x<=79)&&y>169&&y<=309))
         {r,g,b}<=12'hfff;
