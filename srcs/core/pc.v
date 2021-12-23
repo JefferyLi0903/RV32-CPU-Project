@@ -31,6 +31,6 @@ module pc(
     begin: counter
         if(rst) addr<=0;
         else if(offset_en) addr<=offset;
-        else addr<=addr+4;
+        else addr<=addr+1;
     end
 endmodule
