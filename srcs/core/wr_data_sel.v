@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 2021/12/19 15:18:43
+// Create Date: 2021/12/19 17:40:06
 // Design Name: 
-// Module Name: delay
+// Module Name: wr_data_sel
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,12 +20,15 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module delay #(parameter N = 32)(
+module wr_data_sel(
 	input clk,
-	input [N-1:0]data,
-	output reg [N-1:0]data_d
+	input [31:0]data_out,
+	input [31:0]data_mem,
+	input sel, //op[4]
+	output reg [31:0]wr_data
 );
 
-	always@(negedge clk) data_d <= data;
+	always@(negedge clk) wr_data <= sel ? data_mem: data_out;
 
 endmodule 
+

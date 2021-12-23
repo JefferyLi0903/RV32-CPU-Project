@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 2021/12/19 15:18:43
+// Create Date: 2021/12/22 22:32:04
 // Design Name: 
-// Module Name: delay
+// Module Name: wr_addr
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,12 +20,14 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module delay #(parameter N = 32)(
+module wr_addr(
 	input clk,
-	input [N-1:0]data,
-	output reg [N-1:0]data_d
+	input [31:0]ext_imm,
+	input [31:0]data1,
+	output reg [31:0]wr_addr
 );
 
-	always@(negedge clk) data_d <= data;
+	always@(negedge clk) wr_addr <= ext_imm + data1;
 
 endmodule 
+

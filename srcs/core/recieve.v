@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 2021/12/19 15:18:43
+// Create Date: 2021/12/19 15:17:03
 // Design Name: 
-// Module Name: delay
+// Module Name: recieve
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,12 +20,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module delay #(parameter N = 32)(
+module receive #(parameter N = 32)(
 	input clk,
 	input [N-1:0]data,
-	output reg [N-1:0]data_d
+	output reg [N-1:0]data_r
 );
 
-	always@(negedge clk) data_d <= data;
+	always@(posedge clk) data_r <= data;
 
-endmodule 
+endmodule
