@@ -29,10 +29,10 @@ module control(
     output offset_en,//! 请接入PC 
     output mux_sel//! 用于JAL命令将地址写入RAM的指令（我们或许不需要用JAL，那么这个就不需要接入了）
     );
-    assign offset_en = ((instr&`JAL_MASK==`JAL)||(instr&`BLT_MASK==`BLT)||(instr&`BGE_MASK==`BGE)||(instr&`BNE_MASK==`BNE)||(instr&`BEQ_MASK==`BEQ))? 1'b1:1'b0;
-    assign mux_sel = (instr&`JAL_MASK==`JAL)? 1'b1:1'b0; 
-    assign lw_en = (instr&`LW_MASK==`LW)? 1'b1:1'b0;
-    assign sw_en =(instr&`SW_MASK==`SW)? 1'b1:1'b0;
+    assign offset_en = (((instr&`JAL_MASK)==`JAL)||((instr&`BLT_MASK)==`BLT)||((instr&`BGE_MASK)==`BGE)||((instr&`BNE_MASK)==`BNE)||((instr&`BEQ_MASK)==`BEQ))? 1'b1:1'b0;
+    assign mux_sel = ((instr&`JAL_MASK)==`JAL)? 1'b1:1'b0; 
+    assign lw_en = ((instr&`LW_MASK)==`LW)? 1'b1:1'b0;
+    assign sw_en =((instr&`SW_MASK)==`SW)? 1'b1:1'b0;
     assign wr_en =(instr[6:0]=='b0110111||'b0010111||'b1101111||'b1100111||'b0000011||'b0010011)? 1'b1:1'b0;
-    assign sub_en =(instr&`SUB_MASK==`SUB)? 1'b1:1'b0;
+    assign sub_en =((instr&`SUB_MASK)==`SUB)? 1'b1:1'b0;
 endmodule

@@ -31,9 +31,9 @@ module ALU(
     output reg [31:0] dout
     );
     wire [31:0]Mul_r;
-    wire [31:0]Div_r;
+//    wire [31:0]Div_r;
     Mul MUL(din1,din2,Mul_r); 
-    Div DIV(aclk,din1,din2,Div_r);
+//    Div DIV(aclk,din1,din2,Div_r);
     wire [4:0] shamt = din2[4:0];
     always@(*)
     begin
@@ -51,7 +51,7 @@ module ALU(
         if((op==7'b0110011)&&(op_2==0))
             begin
                 if(func==0) dout=Mul_r;
-                else dout=Div_r;
+//                else dout=Div_r;
             end 
         else if(op==7'b0010011)
             begin

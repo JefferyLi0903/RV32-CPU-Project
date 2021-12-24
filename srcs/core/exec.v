@@ -30,9 +30,9 @@ module exec(
     );
     always@(*)
     begin
-        if (instr&`BLT_MASK==`BLT)  offset= (din1<din2)? (imm+addr):1'b0;
-        else if (instr&`BGE_MASK==`BGE)  offset= (din1>=din2)? (imm+addr):1'b0;
-        else if (instr&`BEQ_MASK==`BEQ)  offset= (din1==din2)? (imm+addr):1'b0;
-        else if (instr&`BNE_MASK==`BNE)  offset= (din1!=din2)? (imm+addr):1'b0;
+        if ((instr&`BLT_MASK)==`BLT)  offset= (din1<din2)? (imm+addr):1'b0;
+        else if ((instr&`BGE_MASK)==`BGE)  offset= (din1>=din2)? (imm+addr):1'b0;
+        else if ((instr&`BEQ_MASK)==`BEQ)  offset= (din1==din2)? (imm+addr):1'b0;
+        else if ((instr&`BNE_MASK)==`BNE)  offset= (din1!=din2)? (imm+addr):1'b0;
     end
 endmodule

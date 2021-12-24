@@ -72,7 +72,7 @@ module Mul(
         end
     endgenerate
 endmodule
-
+/*
 module Div(
     input clk,
     input [31:0] a,
@@ -97,5 +97,6 @@ module Div(
         .m_axis_dout_tdata(m_axis_dout_tdata)            // output wire [63 : 0] m_axis_dout_tdata
       );
 endmodule
+*/
 
     
