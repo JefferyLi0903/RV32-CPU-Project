@@ -48,7 +48,7 @@ module ALU(
             3'b110:dout<=din1|din2;
             3'b111:dout<=din1&din2;
         endcase
-        if((op==7'b0110011)&&(op_2==0))
+        if((op==7'b0110011)&&(op_2==1)) //只有乘法前7位为1
             begin
                 if(func==0) dout=Mul_r;
 //                else dout=Div_r;

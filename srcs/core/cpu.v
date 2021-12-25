@@ -74,15 +74,15 @@ module cpu(
 
 
 	//第一级
-	pc pc_cpu(clk,rst,offset_en,offset,addr);//取指更新pc机
+	pc pc_cpu(clk,rst,offset_en,offset_r,addr);//取指更新pc机 
 	//第二级
 	receive #32 r_instr(clk,instr,instr_r);//寄存指令
 	receive #32 r_addr(clk,addr,addr_r);//寄存地址
 	decode decode_cpu(instr_r,imm,rs1,rs2,rd,op,func,op_2);//译码
 	ext32 ext32_cpu(imm,ext_imm);//立即数扩展
 	control control_cpu(instr,lw_en,sw_en,sub_en,wr_en,offset_en,mux_sel);//产生使能信号
-	din_2_mux din_2_mux_cpu( ext_imm,data2,data2_in,op[5], clk);//数据选择
-	exec exec_cpu(instr,addr,imm,data1,data2,offset);//生成offset
+	din_2_mux din_2_mux_cpu( ext_imm,data2,data_in2,op[5], clk);//数据选择  //这里改变了一下data_in2的net
+	exec exec_cpu(instr,addr_r,imm,data1,data2,offset);//生成offset
 	wr_addr wr_addr_cpu(clk,ext_imm,data1,wr_addr);//生成读写地址
 	delay #7 d_op(clk,op,op_d);
 	delay #7 d_op2(clk,op_2,op2_d);
@@ -105,7 +105,7 @@ module cpu(
 	receive #1 r_sub_en(clk,sub_en,sub_en_r);
 	ALU ALU(clk,op_r,op2_r,func_r,sub_en_r,data1_r,data_in2_r,data_out);
 	//第四级
-	receive #32 r_wr_data(clk,data_out,data_out_r);
+	receive #32 r_wr_data(clk,data_out,wr_data_r);
 	wr_data_sel wr_data_sel2(clk,wr_data_r,data_mem,lw_en_s,data);
 	//第五级
 	receive #32 r_data(clk,data,data_r);

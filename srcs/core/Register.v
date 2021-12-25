@@ -32,7 +32,16 @@ module register(
 );
 
 	reg [31:0]register [1:31];
-
+//赋初值模块
+	integer i;
+	initial
+	begin
+		for(i=1;i<32;i=i+1)
+		begin: Initial_reg 
+			register[i]=32'h0;
+		end
+	end
+//赋初值模块结束 
 	assign data1 = (rs1 != 0) ? register[rs1] : 0;
 	assign data2 = (rs2 != 0) ? register[rs2] : 0;
 	
