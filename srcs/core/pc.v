@@ -25,7 +25,7 @@ module pc(
     input rst,
     input offset_en, //! 跳转使能端口
     input [31:0] offset, //! 直接接入ext32的立即数
-    output reg [4:0] addr=0
+    output reg [31:0] addr=0
     );
     always@(negedge clk or posedge rst)
     begin: counter
