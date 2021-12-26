@@ -39,7 +39,7 @@ module decode(
     always@(*) 
     begin
         if((op=='h3)||(op=='h13)) imm=instr[31:20];
-        else if(op=='h23||'h67) imm={instr[31:25],instr[11:7]};
+        else if((op=='h23)||(op=='h67)) imm={instr[31:25],instr[11:7]};
         else if(op=='h63) imm={instr[31],instr[7],instr[30:25],instr[11:8]};
         else if(op=='h6F) imm={instr[31],instr[19:12],instr[20],instr[30:21]};
         else if((op=='h37)||(op=='h17)) imm=instr[31:12]; //同样的错误

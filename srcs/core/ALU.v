@@ -21,7 +21,7 @@
 //! ALU
 
 module ALU(
-    input aclk, //! 这是一个供除法器使用的高速时钟信号, 建议接入尽可能高的时钟信号. 
+    //input aclk, //! 这是一个供除法器使用的高速时钟信号, 建议接入尽可能高的时钟信号. 
     input [6:0] op,
     input [6:0] op_2,
     input [2:0] func,
