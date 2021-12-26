@@ -65,13 +65,11 @@ module cpu(
 	wire [31:0]wr_addr;
 	wire [31:0]data;
 	wire [31:0]data_r;
-	wire lw_en_d;
-	wire sw_en_d;
 	wire lw_en;
 	wire sw_en;
-	wire sub_en_d;
-	wire wr_en_d;
-	wire offset_en_d;
+	wire lw_en_r;
+	wire sw_en_r;
+	wire offset_en_r;
 	//wire [31:0]data2_in;
 	wire [6:0]op_d,op2_d,op_r,op2_r;
 	wire mux_sel; 
@@ -79,7 +77,7 @@ module cpu(
 
 
 	//第一级
-	pc pc_cpu(clk,rst,offset_en_d,offset_r,addr);//取指更新pc机
+	pc pc_cpu(clk,rst,offset_en_r,offset_r,addr);//取指更新pc机
 	//第二级
 	receive #32 r_instr(clk,instr,instr_r);//寄存指令
 	receive #32 r_addr(clk,addr,addr_r);//寄存地址
@@ -95,25 +93,23 @@ module cpu(
 	delay #32 d_data2(clk,data2,data2_d);
 	delay #3 d_func(clk,func,func_d);
 	delay #5 d_rd(clk,rd,rd_d);
-	delay #1 d_lw(clk,lw_en,lw_en_d);
-	delay #1 d_sw(clk,sw_en,sw_en_d);
-	delay #1 d_sub(clk,sub_en,sub_en_d);
-	delay #1 d_wr(clk,wr_en,wr_en_d);
-	delay #1 d_offset(clk,offset_en,offset_en_d);
 	//第三级
 	shift #(2,32) s_wr_addr(clk,wr_addr,wr_addr_s);
 	shift #(2,32) s_data2(clk,data2_d,data2_s);
-	shift #(2,1) s_lw_en(clk,lw_en_d,lw_en_s);
-	shift #(2,1) s_sw_en(clk,sw_en_d,sw_en_s);
+	shift #(2,1) s_lw_en(clk,lw_en_r,lw_en_s);
+	shift #(2,1) s_sw_en(clk,sw_en_r,sw_en_s);
 	shift #(3,5) s_rd(clk,rd_d,rd_s);
-	shift #(3,1) s_wr_en(clk,wr_en_d,wr_en_s);//后面两个周期用到的数据
+	shift #(3,1) s_wr_en(clk,wr_en,wr_en_s);//后面两个周期用到的数据
+	receive #1 r_offset_en(clk,offset_en,offset_en_r);
 	receive #7 r_op(clk,op_d,op_r);
 	receive #7 r_op_2(clk,op2_d,op2_r);
 	receive #32 r_offset(clk,offset,offset_r);
 	receive #32 r_data1(clk,data1_d,data1_r);
 	receive #32 r_data_in2(clk,data_in2,data_in2_r);
 	receive #3 r_func(clk,func_d,func_r);
-	receive #1 r_sub_en(clk,sub_en_d,sub_en_r);
+	receive #1 r_sub_en(clk,sub_en,sub_en_r);
+	receive #1 r_lw_en(clk,lw_en,lw_en_r);
+	receive #1 r_sw_en(clk,sw_en,sw_en_r);
 	ALU ALU(op_r,op2_r,func_r,sub_en_r,data1_r,data_in2_r,data_out);
 	//第四级
 	receive #32 r_wr_data(clk,data_out,data_out_r);
