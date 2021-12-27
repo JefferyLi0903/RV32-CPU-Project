@@ -27,12 +27,13 @@ module register(
 	input [4:0]rd,
 	input [31:0]wr_data,
 	input wr_en,
-	output [31:0]data1,
-	output [31:0]data2
+	output reg [31:0]data1,
+	output reg [31:0]data2
 );
 
 	reg [31:0]register [1:31];
-//èµ‹åˆå€¼æ¨¡å—
+    
+    //¸³³õÖµÄ£¿é
 	integer i;
 	initial
 	begin
@@ -41,9 +42,27 @@ module register(
 			register[i]=32'h0;
 		end
 	end
-//èµ‹åˆå€¼æ¨¡å—ç»“æŸ 
-	assign data1 = (rs1 != 0) ? register[rs1] : 0;
-	assign data2 = (rs2 != 0) ? register[rs2] : 0;
+    //¸³³õÖµÄ£¿é½áÊø 
+    
+    always @(*)
+    begin
+      if(!rs1)
+        data1<=0;
+      else if((rs1==rd) && (wr_en))
+        data1<=wr_data;
+      else
+        data1<=register[rs1];
+    end
+    
+    always @(*)
+    begin
+      if(!rs2)
+        data2<=0;
+      else if((rs2==rd) && (wr_en))
+        data2<=wr_data;
+      else
+        data2<=register[rs2];
+    end
 	
 	always@(negedge clk)
 		if(wr_en) register[rd] <= wr_data;
