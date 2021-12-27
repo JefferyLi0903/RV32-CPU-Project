@@ -23,10 +23,10 @@
 module exec(
     input [31:0] instr,
     input signed [31:0] addr, //! 请接入PC当前地址
-    input signed [31:0] imm, //! 请接�?32位立即数扩展�?
+    input signed [31:0] imm, //! 请接�?32位立即数扩展�?
     input [31:0] din1, //! 请接入寄存器 
     input [31:0] din2, //! 请接入寄存器
-    output reg signed [31:0] offset //! 请接入PC offset�?
+    output reg signed [31:0] offset //! 请接入PC offset�?
     );
      always@(*)
     begin

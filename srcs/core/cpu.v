@@ -83,9 +83,9 @@ module cpu(
 	receive #32 r_addr(clk,addr,addr_r);//寄存地址
 	decode decode_cpu(instr_r,imm,rs1,rs2,rd,op,func,op_2);//译码
 	ext32 ext32_cpu(imm,ext_imm);//立即数扩展
-	control control_cpu(instr,lw_en,sw_en,sub_en,wr_en,offset_en,mux_sel);//产生使能信号
+	control control_cpu(instr_r,lw_en,sw_en,sub_en,wr_en,offset_en,mux_sel);//产生使能信号
 	din_2_mux din_2_mux_cpu( ext_imm,data2,data_in2,op[5], clk);//数据选择
-	exec exec_cpu(instr,addr_r,imm,data1,data2,offset);//生成offset
+	exec exec_cpu(instr_r,addr_r,ext_imm,data1,data2,offset);//生成offset
 	wr_addr wr_addr_cpu(clk,ext_imm,data1,wr_addr);//生成读写地址
 	delay #7 d_op(clk,op,op_d);
 	delay #7 d_op2(clk,op_2,op2_d);
@@ -96,7 +96,7 @@ module cpu(
 	//第三级
 	shift #(2,32) s_wr_addr(clk,wr_addr,wr_addr_s);
 	shift #(2,32) s_data2(clk,data2_d,data2_s);
-	shift #(2,1) s_lw_en(clk,lw_en_r,lw_en_s);
+	shift #(2,1) s_lw_en(clk,lw_en,lw_en_s); //这里不确定是否lw_en, lw_en_r. 
 	shift #(2,1) s_sw_en(clk,sw_en_r,sw_en_s);
 	shift #(3,5) s_rd(clk,rd_d,rd_s);
 	shift #(3,1) s_wr_en(clk,wr_en,wr_en_s);//后面两个周期用到的数据

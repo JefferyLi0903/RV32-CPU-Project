@@ -42,9 +42,9 @@ module sim();
 	initial begin
 	    x1=1;x2=0;
 		rst = 1'b0;
-		#10;
+		#1;
 		rst = 1'b1;
-		#10;
+		#2;
 		rst = 1'b0;
 	end
 
