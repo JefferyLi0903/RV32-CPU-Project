@@ -33,6 +33,6 @@ module control(
     assign mux_sel = ((instr&`JAL_MASK)==`JAL)? 1'b1:1'b0; 
     assign lw_en = ((instr&`LW_MASK)==`LW)? 1'b1:1'b0;
     assign sw_en =((instr&`SW_MASK)==`SW)? 1'b1:1'b0;
-    assign wr_en =((instr[6:0]=='b0110111)||(instr[6:0]=='b0010111)||(instr[6:0]=='b1101111)||(instr[6:0]=='b1100111)||(instr[6:0]=='b0000011)||(instr[6:0]=='b0010011))? 1'b1:1'b0; //之前漏改了这个
+    assign wr_en =((instr[6:0]=='b0110111)||(instr[6:0]=='b0010111)||(instr[6:0]=='b1101111)||(instr[6:0]=='b1100111)||(instr[6:0]=='b0000011)||(instr[6:0]=='b0010011)||(instr[6:0]=='b0110011))? 1'b1:1'b0; //之前漏改了这个
     assign sub_en =((instr&`SUB_MASK)==`SUB)? 1'b1:1'b0;
 endmodule
