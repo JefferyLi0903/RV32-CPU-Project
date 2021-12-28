@@ -33,7 +33,7 @@ module receive_en #(parameter M = 3,N = 32)(
 	always@(posedge clk)
 	begin
 	if(en)
-	data_p <= {data_en-M,data_en-M+1,data_en-M+2};
+	data_p <= {data_en,data_en,data_en};
 	else
 	data_p <= {data_p[(M-1)*N-1:0],data};
 	end
