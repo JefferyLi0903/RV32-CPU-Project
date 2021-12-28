@@ -30,7 +30,7 @@ module Input(
     );
     
     wire [1:0]button1;
-    reg [19:0]m=0;
+    reg [27:0]m=0;
     
     shake uut1(rst,clk,button[0],button1[0]);
     shake uut2(rst,clk,button[1],button1[1]);
@@ -40,7 +40,7 @@ module Input(
     begin
     if(rst)
       {x1,x2,x3,x4}<=13'b0;
-    else if(m==19'd120)
+    else if(m==28'd100000000)
       begin
       m<=0;
       case(sw[3:0])
