@@ -113,7 +113,7 @@ module cpu(
 	wr_data_sel wr_data_sel2(clk,data_out_r,data_mem,lw_en_s,data);
 	//µÚÎå¼¶
 	receive #32 r_data(clk,data,data_r);
-	register register_cpu(clk,rs1,rs2,rd_s,data_r,wr_en_s,data1,data2);
+	register register_cpu(clk,rst,rs1,rs2,rd_s,data_r,wr_en_s,data1,data2);
 
 
 endmodule 

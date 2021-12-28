@@ -22,6 +22,7 @@
 
 module register(
 	input clk,
+	input rst,
 	input [4:0]rs1,
 	input [4:0]rs2,
 	input [4:0]rd,
@@ -44,6 +45,8 @@ module register(
 	end
     //¸³³õÖµÄ£¿é½áÊø 
     
+    
+    
     always @(*)
     begin
       if(!rs1)
@@ -64,7 +67,15 @@ module register(
         data2<=register[rs2];
     end
 	
-	always@(negedge clk)
-		if(wr_en) register[rd] <= wr_data;
- 
+	always@(negedge clk,posedge rst)
+	begin
+	   if(rst)
+       begin
+		 for(i=1;i<32;i=i+1)
+		 begin 
+			register[i]=32'h0;
+		 end
+	   end
+	   else if(wr_en) register[rd] <= wr_data;
+    end
 endmodule
