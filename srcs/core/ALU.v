@@ -37,22 +37,25 @@ module ALU(
     wire [4:0] shamt = din2[4:0];
     always@(*)
     begin
-        case(func)
-            3'b000: 
-                if(sub_en) dout<=din1-din2; 
-                else dout<=din1+din2;
-            3'b011:
-                if(din1<din2) dout<=1;
-                else dout<=0;
-            3'b100:dout<=din1^din2;
-            3'b110:dout<=din1|din2;
-            3'b111:dout<=din1&din2;
-        endcase
-        if((op==7'b0110011)&&(op_2==1)) //只有乘法前7位为1
+        if(op_2==0)
+        begin
+            case(func)
+                3'b000: 
+                    if(sub_en) dout<=din1-din2; 
+                    else dout<=din1+din2;
+                3'b011:
+                    if(din1<din2) dout<=1;
+                    else dout<=0;
+                3'b100:dout<=din1^din2;
+                3'b110:dout<=din1|din2;
+                3'b111:dout<=din1&din2;
+            endcase
+        end
+        else if((op==7'b0110011)&&(op_2==1)) //只有乘法前7位为1
             begin
                 if(func==0) dout=Mul_r;
 //                else dout=Div_r;
-            end 
+            end
         else if(op==7'b0010011)
             begin
                 case(func)

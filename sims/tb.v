@@ -40,7 +40,7 @@ module sim();
 	always#(`clk_period/2) clk = ~clk;
 	
 	initial begin
-	    x1=1;x2=0;
+	    x1=0;x2=30'h2100_0000;
 		rst = 1'b0;
 		#1;
 		rst = 1'b1;
