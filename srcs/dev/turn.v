@@ -22,7 +22,7 @@
 
 module turn(
     input clk,
-    input [19:0] x,
+    input [29:0] x,
     input clr,
     input y,
     output reg x0,
@@ -33,15 +33,16 @@ module turn(
     output reg [3:0]x5
     );
     
-    reg [43:0]count=0;
+    reg [66:0]count=0;
     reg [4:0]count1=0;
-    reg [3:0]x6=0;
+    reg y0;
+    reg [3:0]y1,y2,y3,y4,y5,x6=0;
     
     always @(posedge clk)
     begin
       if(clr)
         count1<=0;
-      else if(count1==5'd21)
+      else if(count1==5'd31)
         count1<=0;
       else
         count1<=count1+1;
@@ -52,56 +53,74 @@ module turn(
       if(clr)
         count<=0;
       else if(count1==0)
-        count<={24'h000000,x};
-      else if(count1<=20)
+        count<={37'h0,x};
+      else if(count1<31)
         begin
-          if(count[23:20]>=5)
-            count[23:20]<=count[23:20]+2'd3;
-          if(count[27:24]>=5)
-            count[27:24]<=count[27:24]+2'd3;
-          if(count[31:28]>=5)
-            count[31:28]<=count[31:28]+2'd3;
-          if(count[35:32]>=5)
-            count[35:32]<=count[35:32]+2'd3;
-          if(count[39:36]>=5)
-            count[39:36]<=count[39:36]+2'd3;
-          if(count[43:40]>=5)
-            count[43:40]<=count[43:40]+2'd3;
-          count=count<<1;
+          if(count[33:30]>=5)
+            count[33:30]=count[33:30]+2'd3;
+          if(count[37:34]>=5)
+            count[37:34]=count[37:34]+2'd3;
+          if(count[41:38]>=5)
+            count[41:38]=count[41:38]+2'd3;
+          if(count[45:42]>=5)
+            count[45:42]=count[45:42]+2'd3;
+          if(count[49:46]>=5)
+            count[49:46]=count[49:46]+2'd3;
+          if(count[53:50]>=5)
+            count[53:50]=count[53:50]+2'd3;
+          if(count[57:54]>=5)
+            count[57:54]=count[57:54]+2'd3;
+          if(count[61:58]>=5)
+            count[61:58]=count[61:58]+2'd3;
+          if(count[65:62]>=5)
+            count[65:62]=count[65:62]+2'd3;
+          count<=count<<1;
         end
     end
     
+      
     always @(posedge clk)
-    begin
       if(clr)
-        {x1,x2,x3,x4,x5,x6}<=0;
-      else if(count1==5'd21)
-      begin
-        {x1,x2,x3,x4,x5,x6}<=count[43:20];
-        x0<=y;
-        if(x6>=4'd5)
+        {y1,y2,y3,y4,y5,x6}<=0;
+      else if(count1==5'd31)
         begin
-        if(x5<4'd9)
-          x5<=x5+1;
-        else if(x4<4'd9)
+        {y1,y2,y3,y4,y5,x6}<=count[65:42];
+        y0<=y||count[66];
+        end
+        
+     always @(*)
+     begin   
+      if(x6>4'd4)
+      begin
+        x6=0;
+        if(y5<4'd9)
+          begin
+          x5<=y5+1;
+          {x0,x1,x2,x3,x4}<={y0,y1,y2,y3,y4};
+          end
+        else if(y4<4'd9)
           begin
             x5<=0;
-            x4<=x4+1;
+            x4<=y4+1;
+            {x0,x1,x2,x3}<={y0,y1,y2,y3};
           end
-        else if(x3<4'd9)
+        else if(y3<4'd9)
           begin
             {x4,x5}<=0;
-            x3<=x3+1;
+            x3<=y3+1;
+            {x0,x1,x2}<={y0,y1,y2};
           end
-        else if(x2<4'd9)
+        else if(y2<4'd9)
           begin
             {x3,x4,x5}<=0;
-            x2<=x2+1;
+            x2<=y2+1;
+            {x0,x1}<={y0,y1};
           end
-        else if(x1<4'd9)
+        else if(y1<4'd9)
           begin
             {x2,x3,x4,x5}<=0;
-            x1<=x1+1;
+            x1<=y1+1;
+            x0<=y0;
           end
         else
           begin
@@ -109,7 +128,9 @@ module turn(
           x0<=1;
           end
         end
-      end
-    end
+    else
+      {x0,x1,x2,x3,x4,x5}<={y0,y1,y2,y3,y4,y5};
+  end
+        
    
 endmodule

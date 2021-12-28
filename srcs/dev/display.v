@@ -62,12 +62,12 @@ module display(
       4'b0001:
       begin
         sw1<=4'b0010;
-        sw<=4'b1110;
+        sw<=4'b0111;
         if(show||!switch[0])
         begin
         case(x1)
-        1'b0:seg<=8'b11000000;
-        1'b1:seg<=8'b11111001;
+        1'b0:seg<=8'b01000000;
+        1'b1:seg<=8'b01111001;
         default;
         endcase;
         end
@@ -78,7 +78,7 @@ module display(
       4'b0010:
       begin
         sw1<=4'b0100;
-        sw<=4'b1101;
+        sw<=4'b1011;
         if(show||!switch[1])
         begin
         case(x2)
@@ -102,7 +102,7 @@ module display(
       4'b0100:
       begin
         sw1<=4'b1000;
-        sw<=4'b1011;
+        sw<=4'b1101;
         if(show||!switch[2])
         begin
         case(x3)
@@ -127,25 +127,25 @@ module display(
       4'b1000:
       begin
         sw1<=4'b0001;
-        sw<=4'b0111;
+        sw<=4'b1110;
         if(show||!switch[3])
         begin
         case(x4)
-        4'b0000:seg<=8'b01000000;
-        4'b0001:seg<=8'b01111001;
-        4'b0010:seg<=8'b00100100;
-        4'b0011:seg<=8'b00110000;
-        4'b0100:seg<=8'b00011001;
-        4'b0101:seg<=8'b00010010;
-        4'b0110:seg<=8'b00000010;
-        4'b0111:seg<=8'b01111000;
-        4'b1000:seg<=8'b00000000;
-        4'b1001:seg<=8'b00010000;
+        4'b0000:seg<=8'b11000000;
+        4'b0001:seg<=8'b11111001;
+        4'b0010:seg<=8'b10100100;
+        4'b0011:seg<=8'b10110000;
+        4'b0100:seg<=8'b10011001;
+        4'b0101:seg<=8'b10010010;
+        4'b0110:seg<=8'b10000010;
+        4'b0111:seg<=8'b11111000;
+        4'b1000:seg<=8'b10000000;
+        4'b1001:seg<=8'b10010000;
         default;
         endcase;
         end
         else
-        seg<=8'b01111111;
+        seg<=8'b11111111;
       end
       
       endcase;
