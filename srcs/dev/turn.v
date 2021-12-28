@@ -30,13 +30,13 @@ module turn(
     output reg [3:0]x2,
     output reg [3:0]x3,
     output reg [3:0]x4,
-    output reg [3:0]x5
+    output reg [3:0]x5,
+    output reg [3:0]x6
     );
     
     reg [66:0]count=0;
     reg [4:0]count1=0;
     reg y0;
-    reg [3:0]y1,y2,y3,y4,y5,x6=0;
     
     always @(posedge clk)
     begin
@@ -81,56 +81,14 @@ module turn(
       
     always @(posedge clk)
       if(clr)
-        {y1,y2,y3,y4,y5,x6}<=0;
+        {x1,x2,x3,x4,x5,x6}<=0;
       else if(count1==5'd31)
         begin
-        {y1,y2,y3,y4,y5,x6}<=count[65:42];
-        y0<=y||count[66];
+        {x1,x2,x3,x4,x5,x6}<=count[65:42];
+        x0<=y||count[66];
         end
         
-     always @(*)
-     begin   
-      if(x6>4'd4)
-      begin
-        x6=0;
-        if(y5<4'd9)
-          begin
-          x5<=y5+1;
-          {x0,x1,x2,x3,x4}<={y0,y1,y2,y3,y4};
-          end
-        else if(y4<4'd9)
-          begin
-            x5<=0;
-            x4<=y4+1;
-            {x0,x1,x2,x3}<={y0,y1,y2,y3};
-          end
-        else if(y3<4'd9)
-          begin
-            {x4,x5}<=0;
-            x3<=y3+1;
-            {x0,x1,x2}<={y0,y1,y2};
-          end
-        else if(y2<4'd9)
-          begin
-            {x3,x4,x5}<=0;
-            x2<=y2+1;
-            {x0,x1}<={y0,y1};
-          end
-        else if(y1<4'd9)
-          begin
-            {x2,x3,x4,x5}<=0;
-            x1<=y1+1;
-            x0<=y0;
-          end
-        else
-          begin
-          {x1,x2,x3,x4,x5}<=0;
-          x0<=1;
-          end
-        end
-    else
-      {x0,x1,x2,x3,x4,x5}<={y0,y1,y2,y3,y4,y5};
-  end
+     
         
    
 endmodule
