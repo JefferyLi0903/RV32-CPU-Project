@@ -100,6 +100,10 @@ module VGA(
     
     always @(posedge vga_clk)
     begin
+    if(clr)
+      {r,g,b}<=4'b0;
+    else
+    begin
     case(x1)
     1'd0:
     begin
@@ -693,6 +697,7 @@ module VGA(
     default;
     endcase
     
+    end
     end
     
 endmodule

@@ -30,13 +30,15 @@ module turn(
     output reg [3:0]x2,
     output reg [3:0]x3,
     output reg [3:0]x4,
-    output reg [3:0]x5,
-    output reg [3:0]x6
+    output reg [3:0]x5
     );
     
     reg [66:0]count=0;
     reg [4:0]count1=0;
     reg y0;
+    wire [30:0]m;
+    
+    assign m={y,30'b0}+x;
     
     always @(posedge clk)
     begin
@@ -53,7 +55,7 @@ module turn(
       if(clr)
         count<=0;
       else if(count1==0)
-        count<={37'h0,x};
+        count<={36'h0,m};
       else if(count1<31)
         begin
           if(count[33:30]>=5)
@@ -81,11 +83,11 @@ module turn(
       
     always @(posedge clk)
       if(clr)
-        {x1,x2,x3,x4,x5,x6}<=0;
+        {x1,x2,x3,x4,x5}<=0;
       else if(count1==5'd31)
         begin
-        {x1,x2,x3,x4,x5,x6}<=count[65:42];
-        x0<=y||count[66];
+        {x1,x2,x3,x4,x5}<=count[65:46];
+        x0<=count[66];
         end
         
      
