@@ -1,4 +1,4 @@
-//U型指令
+//U型指�?
 //LUI
 `define LUI_MASK 32'h7F
 `define LUI 32'h37
@@ -6,11 +6,11 @@
 `define AUIPC_MASK 32'h7F
 `define AUIPC 32'h17
 
-//J型指令
+//J型指�?
 //JAL
 `define JAL_MASK 32'h7F
 `define JAL 32'h6F
-//B型指令
+//B型指�?
 //BEQ
 `define BEQ_MASK 32'h707F
 `define BEQ 32'h63
@@ -31,7 +31,7 @@
 `define BGEU 32'h7063
 
 
-//I型指令
+//I型指�?
 //JALR
 `define JALR_MASK 32'h707F
 `define JALR 32'h6F
@@ -42,8 +42,8 @@
 `define LH_MASK 32'h707F
 `define LH 32'h1003
 //LW
-`define LW_MASK 32'h707F
-`define LW 32'h2003
+`define LW_MASK 32'h0000707F
+`define LW 32'h00002003
 //LBU
 `define LBU_MASK 32'h707F
 `define LBU 32'h4003
@@ -109,7 +109,7 @@
 `define CSRRCI 32'h773
 
 
-//S型指令
+//S型指�?
 //SB
 `define SB_MASK 32'h707F
 `define SB 32'h23
@@ -120,7 +120,7 @@
 `define SW_MASK 32'h707F
 `define SW 32'h2023
 
-//R型指令
+//R型指�?
 //ADD
 `define ADD_MASK 32'hFE00_707F
 `define ADD 32'h33

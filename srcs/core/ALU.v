@@ -21,23 +21,24 @@
 //! ALU
 
 module ALU(
-    //input aclk, //! è¿™æ˜¯ä¸€ä¸ªä¾›é™¤æ³•å™¨ä½¿ç”¨çš„é«˜é€Ÿæ—¶é’Ÿä¿¡å·, å»ºè®®æ¥å…¥å°½å¯èƒ½é«˜çš„æ—¶é’Ÿä¿¡å·. 
+    //input aclk, //! ÕâÊÇÒ»¸ö¹©³ı·¨Æ÷Ê¹ÓÃµÄ¸ßËÙÊ±ÖÓĞÅºÅ, ½¨Òé½ÓÈë¾¡¿ÉÄÜ¸ßµÄÊ±ÖÓĞÅºÅ. 
     input [6:0] op,
     input [6:0] op_2,
     input [2:0] func,
     input sub_en,
     input [31:0] din1,
     input [31:0] din2,
-    output reg [31:0] dout
+    output reg [31:0] dout1
     );
     wire [31:0]Mul_r;
 //    wire [31:0]Div_r;
     Mul MUL(din1,din2,Mul_r); 
 //    Div DIV(aclk,din1,din2,Div_r);
     wire [4:0] shamt = din2[4:0];
+    reg [31:0]dout;
     always@(*)
     begin
-        if(op_2==0)
+        if(op_2!=1)
         begin
             case(func)
                 3'b000: 
@@ -51,7 +52,7 @@ module ALU(
                 3'b111:dout<=din1&din2;
             endcase
         end
-        else if((op==7'b0110011)&&(op_2==1)) //åªæœ‰ä¹˜æ³•å‰7ä½ä¸º1
+        else if((op==7'b0110011)&&(op_2==1)) //Ö»ÓĞ³Ë·¨Ç°7Î»Îª1
             begin
                 if(func==0) dout=Mul_r;
 //                else dout=Div_r;
@@ -63,5 +64,9 @@ module ALU(
                     3'b101:dout<=din1>>shamt; 
                 endcase
             end
+        if(dout[31])
+          dout1<=dout-32'd77000000;
+        else
+          dout1<=dout;
     end
 endmodule

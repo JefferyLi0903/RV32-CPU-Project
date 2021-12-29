@@ -18,11 +18,11 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-//! 解码器
+//! 解码�?
 
 module decode(
     input [31:0] instr, 
-    output reg [19:0] imm, //! 请接入ext32以扩展
+    output reg [19:0] imm, //! 请接入ext32以扩�?
     output [4:0] rs1, //! 请接入寄存器地址
     output [4:0] rs2, //! 请接入寄存器地址
     output [4:0] rd,  //! 请接入寄存器地址
@@ -42,6 +42,6 @@ module decode(
         else if((op=='h23)||(op=='h67)) imm={instr[31:25],instr[11:7]};
         else if(op=='h63) imm={instr[31],instr[7],instr[30:25],instr[11:8]};
         else if(op=='h6F) imm={instr[31],instr[19:12],instr[20],instr[30:21]};
-        else if((op=='h37)||(op=='h17)) imm=instr[31:12]; //同样的错误
+        else if((op=='h37)||(op=='h17)) imm=instr[31:12];
     end
 endmodule

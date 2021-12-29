@@ -27,14 +27,6 @@ module Mul(
     );
     reg [63:0] tmp [31:0];
     reg [63:0] sum=0;
-    /*方法一
-    always@(*)
-    begin
-        sum=a*b;
-        c=sum>>31;
-    end 
-    */
-    // /*方法二
     reg [63:0] ext_a;
     integer i;
     generate
@@ -110,4 +102,3 @@ module Div(
 endmodule
 */
 
-    
