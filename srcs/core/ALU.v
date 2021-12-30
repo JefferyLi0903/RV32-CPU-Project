@@ -28,14 +28,13 @@ module ALU(
     input sub_en,
     input [31:0] din1,
     input [31:0] din2,
-    output reg [31:0] dout1
+    output reg [31:0] dout
     );
     wire [31:0]Mul_r;
 //    wire [31:0]Div_r;
     Mul MUL(din1,din2,Mul_r); 
 //    Div DIV(aclk,din1,din2,Div_r);
     wire [4:0] shamt = din2[4:0];
-    reg [31:0]dout;
     always@(*)
     begin
         if(op_2!=1)
@@ -64,9 +63,5 @@ module ALU(
                     3'b101:dout<=din1>>shamt; 
                 endcase
             end
-        if(dout[31])
-          dout1<=dout-32'd77000000;
-        else
-          dout1<=dout;
     end
 endmodule
