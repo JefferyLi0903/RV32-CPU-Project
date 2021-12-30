@@ -30,7 +30,8 @@ module turn(
     output reg [3:0]x2,
     output reg [3:0]x3,
     output reg [3:0]x4,
-    output reg [3:0]x5
+    output reg [3:0]x5,
+    output reg [3:0]x6
     );
     
     reg [66:0]count=0;
@@ -83,10 +84,10 @@ module turn(
       
     always @(posedge clk)
       if(clr)
-        {x1,x2,x3,x4,x5}<=0;
+        {x1,x2,x3,x4,x5,x6}<=0;
       else if(count1==5'd31)
         begin
-        {x1,x2,x3,x4,x5}<=count[65:46];
+        {x1,x2,x3,x4,x5,x6}<=count[65:42];
         x0<=count[66];
         end
         

@@ -34,7 +34,7 @@ module top(
     
     wire x1,x1_in,x1_cpu,x1_out,x1_out1,x1_vga,start,rst_cpu,clk_cpu;
     wire [3:0]x2,x3,x4,x5,x6;
-    wire [3:0]x2_out,x3_out,x4_out,x5_out,x6_out;
+    wire [3:0]x2_out,x3_out,x4_out,x5_out,x6_out,x7_out;
     wire [3:0]x2_vga,x3_vga,x4_vga,x5_vga,x6_vga;
     wire [29:0]decimal,decimal_in,decimal_cpu,decimal_out;
     
@@ -46,8 +46,8 @@ module top(
     clock u4(clock,clk_cpu);//生成cpu所需时钟
     transmission u5(x1,decimal,rst,clock,button[2],start,x1_cpu,decimal_cpu);//将输入数据传入cpu并使cpu开始工作
     cpu_top u6(clk_cpu,rst_cpu,x1_cpu,decimal_cpu,x1_out,decimal_out);
-    turn u7(clock,decimal_out,rst,x1_out,x1_out1,x2_out,x3_out,x4_out,x5_out,x6_out);//将输出数据转换成BCD码
-    correct u8(x1_out1,x1_out,clock,rst,decimal_out,x2_out,x3_out,x4_out,x5_out,x6_out,x1_vga,x2_vga,x3_vga,x4_vga,x5_vga,x6_vga);//对输出数据进行算法修正
+    turn u7(clock,decimal_out,rst,x1_out,x1_out1,x2_out,x3_out,x4_out,x5_out,x6_out,x7_out);//将输出数据转换成BCD码
+    correct_out u8(x1_out1,x2_out,x3_out,x4_out,x5_out,x6_out,x7_out,x1_vga,x2_vga,x3_vga,x4_vga,x5_vga,x6_vga);//四舍五入
     VGA u9(clock,rst,x1_vga,x2_vga,x3_vga,x4_vga,x5_vga,x6_vga,r,g,b,hsync,vsync);
     
 endmodule
