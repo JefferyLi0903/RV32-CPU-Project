@@ -19,15 +19,15 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 `include "defs.v"
-//! 控制�?
+//! 控制�?
 module control(
     input [31:0] instr,
-    output lw_en,//! 请接入RAM(data_mem)接口, 在高电平时inout接口处于读的状�??
-    output sw_en,//! 请接入RAM(data_mem)接口, 在高电平时inout接口处于写的状�??
+    output lw_en,//! 请接入RAM(data_mem)接口, 在高电平时inout接口处于读的状态
+    output sw_en,//! 请接入RAM(data_mem)接口, 在高电平时inout接口处于写的状态
     output sub_en,//! 请接入ALU
     output wr_en,//! 请接入寄存器
     output offset_en,//! 请接入PC 
-    output mux_sel//! 用于JAL命令将地�?写入RAM的指令（我们或许不需要用JAL，那么这个就不需要接入了�?
+    output mux_sel//! 用于JAL命令将地址写入RAM的指令（我们或许不需要用JAL，那么这个就不需要接入了）
     );
     assign offset_en = (((instr&`JAL_MASK)==`JAL)||((instr&`BLT_MASK)==`BLT)||((instr&`BGE_MASK)==`BGE)||((instr&`BNE_MASK)==`BNE)||((instr&`BEQ_MASK)==`BEQ))? 1'b1:1'b0;
     assign mux_sel = ((instr&`JAL_MASK)==`JAL)? 1'b1:1'b0; 

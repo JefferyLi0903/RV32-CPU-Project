@@ -1,22 +1,22 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
+// Company:
+// Engineer:
+//
 // Create Date: 2021/12/22 14:51:51
-// Design Name: 
+// Design Name:
 // Module Name: correct
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
+// Project Name:
+// Target Devices:
+// Tool Versions:
+// Description:
+//
+// Dependencies:
+//
 // Revision:
 // Revision 0.01 - File Created
 // Additional Comments:
-// 
+//
 //////////////////////////////////////////////////////////////////////////////////
 
 
@@ -37,8 +37,8 @@ module correct(
     output reg[3:0] y3,
     output reg[3:0] y4,
     output reg[3:0] y5
-    );
-    
+  );
+
     wire [29:0]m;
     wire [3:0]z1,z2,z3,z4,z5;
     wire z0;
@@ -46,37 +46,37 @@ module correct(
     wire [31:0] in2;
     wire [31:0] out;
     wire ground;
-    
+
     assign ext_x={y,x,1'd0};
     assign in2=32'd2037552085;
     assign ground=0;
-    
+
     Mul mul(ext_x,in2,out);
-    
+
     assign m=(x0||x>=32'd950000000)?(out[30:1]):x;
-    
+
     turn uut1(clk,m,rst,ground,z0,z1,z2,z3,z4,z5);
-    
+
     always @(*)
-    begin
+      begin
       if(x0||x>=32'd950000000)
-        begin
-          y0<=z0;
-          y1<=z1;
-          y2<=z2;
-          y3<=z3;
-          y4<=z4;
-          y5<=z5;
-        end
+      begin
+        y0<=z0;
+        y1<=z1;
+        y2<=z2;
+        y3<=z3;
+        y4<=z4;
+        y5<=z5;
+      end
       else
-        begin
-          y0<=x0;
-          y1<=x1;
-          y2<=x2;
-          y3<=x3;
-          y4<=x4;
-          y5<=x5;
-        end
+      begin
+        y0<=x0;
+        y1<=x1;
+        y2<=x2;
+        y3<=x3;
+        y4<=x4;
+        y5<=x5;
+      end
     end
-    
+
 endmodule

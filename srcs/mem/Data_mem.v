@@ -23,15 +23,15 @@
 module Data_mem(
 	input clk,
 	input rst,
-	input [31:0]addr,//µØÖ·
-	input [31:0]data2,//Ğ´ÈëRAMµÄÊı¾İ
+	input [31:0]addr,//åœ°å€
+	input [31:0]data2,//å†™å…¥RAMçš„æ•°æ®
 	input lw_en,
 	input sw_en,
-	input x1,//ÊäÈëÊı¾İµÄÕûÊı²¿·Ö
-	input [29:0]x2,//ÊäÈëÊı¾İµÄĞ¡Êı²¿·Ö
-	output reg y1,//Êä³öÊı¾İµÄÕûÊı²¿·Ö
-	output reg [29:0]y2,//Êä³öÊı¾İµÄĞ¡Êı²¿·Ö
-	output reg [31:0]data_mem//´ÓRAMÖĞ¶Á³öµÄÊı¾İ
+	input x1,//è¾“å…¥æ•°æ®çš„æ•´æ•°éƒ¨åˆ†
+	input [29:0]x2,//è¾“å…¥æ•°æ®çš„å°æ•°éƒ¨åˆ†
+	output reg y1,//è¾“å‡ºæ•°æ®çš„æ•´æ•°éƒ¨åˆ†
+	output reg [29:0]y2,//è¾“å‡ºæ•°æ®çš„å°æ•°éƒ¨åˆ†
+	output reg [31:0]data_mem//ä»RAMä¸­è¯»å‡ºçš„æ•°æ®
 );
 
 	reg [31:0]data[0:255];
