@@ -22,17 +22,13 @@
 
 module transmission(
     input x1,
-    input [3:0] x2,
-    input [3:0] x3,
-    input [3:0] x4,
+    input [29:0] x2,
     input rst,
     input clk,
     input button,
     output reg start,
     output reg y1,
-    output reg [3:0] y2,
-    output reg [3:0] y3,
-    output reg [3:0] y4
+    output reg [29:0] y2
     );
     
     wire button1;
@@ -50,9 +46,9 @@ module transmission(
     always @(posedge button1,posedge rst)
     begin
       if(rst)
-        {y1,y2,y3,y4}<=0;
+        {y1,y2}<=0;
       else
-        {y1,y2,y3,y4}<={x1,x2,x3,x4};
+        {y1,y2}<={x1,x2};
     end
     
 endmodule

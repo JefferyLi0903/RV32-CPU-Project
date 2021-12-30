@@ -23,16 +23,17 @@
 module exec(
     input [31:0] instr,
     input signed [31:0] addr, //! 请接入PC当前地址
-    input signed [31:0] imm, //! 请接入32位立即数扩展器
+    input signed [31:0] imm, //! 请接入32位立即数扩展
     input [31:0] din1, //! 请接入寄存器 
     input [31:0] din2, //! 请接入寄存器
     output reg signed [31:0] offset //! 请接入PC offset端
-    );
-    always@(*)
+    );    
+    
+     always@(*)
     begin
-        if ((instr&`BLT_MASK)==`BLT)  offset= (din1<din2)? (imm+addr):1'b0;
-        else if ((instr&`BGE_MASK)==`BGE)  offset= (din1>=din2)? (imm+addr):1'b0;
-        else if ((instr&`BEQ_MASK)==`BEQ)  offset= (din1==din2)? (imm+addr):1'b0;
-        else if ((instr&`BNE_MASK)==`BNE)  offset= (din1!=din2)? (imm+addr):1'b0;
+        if ((instr&`BLT_MASK)==`BLT)  offset<=(din1<din2)?(imm+addr):(addr+4);
+        else if ((instr&`BGE_MASK)==`BGE)  offset<= (din1>=din2)? (imm+addr):(addr+4);
+        else if ((instr&`BEQ_MASK)==`BEQ)  offset<= (din1==din2)? (imm+addr):(addr+4);
+        else if ((instr&`BNE_MASK)==`BNE)  offset<= (din1!=din2)? (imm+addr):(addr+4);        
     end
 endmodule

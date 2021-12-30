@@ -25,15 +25,17 @@ module Mul(
     input [31:0] b,
     output reg [31:0] c
     );
-    reg [31:0] tmp [63:0];
+    reg [63:0] tmp [31:0];
     reg [63:0] sum=0;
+    reg [63:0] ext_a;
     integer i;
     generate
         always@(*)
         begin
+            ext_a=a;
             for(i=0;i<32;i=i+1)
             begin
-                if(b[i]) tmp[i]=a << i;
+                if(b[i]) tmp[i]=ext_a << i;
                 else tmp[i]=0;
             end
             sum = tmp[0]+
@@ -71,6 +73,7 @@ module Mul(
             c = sum>>31;
         end
     endgenerate
+    // */
 endmodule
 /*
 module Div(
@@ -99,4 +102,3 @@ module Div(
 endmodule
 */
 
-    

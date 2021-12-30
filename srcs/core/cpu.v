@@ -54,8 +54,8 @@ module cpu(
 	wire [31:0]data_out;
 	wire wr_en;
 	wire wr_en_s;
-	wire [31:0]wr_data;
-	wire [31:0]wr_data_r;
+	//wire [31:0]wr_data;
+	//wire [31:0]wr_data_r;
 	wire [31:0]ext_imm;
 	wire [31:0]data_in2;
 	wire [31:0]data_in2_r;
@@ -67,22 +67,24 @@ module cpu(
 	wire [31:0]data_r;
 	wire lw_en;
 	wire sw_en;
-	wire [31:0]data2_in;
+	wire offset_en_r;
+	//wire [31:0]data2_in;
 	wire [6:0]op_d,op2_d,op_r,op2_r;
 	wire mux_sel; 
 	wire [31:0]data_out_r;
 
 
+
 	//第一级
-	pc pc_cpu(clk,rst,offset_en,offset,addr);//取指更新pc机
+	pc pc_cpu(clk,rst,offset_en_r,offset_r,addr);//取指更新pc机
 	//第二级
 	receive #32 r_instr(clk,instr,instr_r);//寄存指令
-	receive #32 r_addr(clk,addr,addr_r);//寄存地址
+	receive_en #(3,32) r_addr(clk,addr,offset_en,offset,addr_r);//寄存地址
 	decode decode_cpu(instr_r,imm,rs1,rs2,rd,op,func,op_2);//译码
 	ext32 ext32_cpu(imm,ext_imm);//立即数扩展
-	control control_cpu(instr,lw_en,sw_en,sub_en,wr_en,offset_en,mux_sel);//产生使能信号
-	din_2_mux din_2_mux_cpu( ext_imm,data2,data2_in,op[5], clk);//数据选择
-	exec exec_cpu(instr,addr,imm,data1,data2,offset);//生成offset
+	control control_cpu(instr_r,lw_en,sw_en,sub_en,wr_en,offset_en,mux_sel);//产生使能信号
+	din_2_mux din_2_mux_cpu(ext_imm,data2,data_in2,op[5],clk);//数据选择
+	exec exec_cpu(instr_r,addr_r,ext_imm,data1,data2,offset);//生成offset
 	wr_addr wr_addr_cpu(clk,ext_imm,data1,wr_addr);//生成读写地址
 	delay #7 d_op(clk,op,op_d);
 	delay #7 d_op2(clk,op_2,op2_d);
@@ -91,11 +93,13 @@ module cpu(
 	delay #3 d_func(clk,func,func_d);
 	delay #5 d_rd(clk,rd,rd_d);
 	//第三级
+	shift #(2,32) s_wr_addr(clk,wr_addr,wr_addr_s);
 	shift #(2,32) s_data2(clk,data2_d,data2_s);
 	shift #(2,1) s_lw_en(clk,lw_en,lw_en_s);
 	shift #(2,1) s_sw_en(clk,sw_en,sw_en_s);
 	shift #(3,5) s_rd(clk,rd_d,rd_s);
 	shift #(3,1) s_wr_en(clk,wr_en,wr_en_s);//后面两个周期用到的数据
+	receive #1 r_offset_en(clk,offset_en,offset_en_r);
 	receive #7 r_op(clk,op_d,op_r);
 	receive #7 r_op_2(clk,op2_d,op2_r);
 	receive #32 r_offset(clk,offset,offset_r);
@@ -103,13 +107,13 @@ module cpu(
 	receive #32 r_data_in2(clk,data_in2,data_in2_r);
 	receive #3 r_func(clk,func_d,func_r);
 	receive #1 r_sub_en(clk,sub_en,sub_en_r);
-	ALU ALU(clk,op_r,op2_r,func_r,sub_en_r,data1_r,data_in2_r,data_out);
+	ALU ALU(op_r,op2_r,func_r,sub_en_r,data1_r,data_in2_r,data_out);
 	//第四级
 	receive #32 r_wr_data(clk,data_out,data_out_r);
-	wr_data_sel wr_data_sel2(clk,wr_data_r,data_mem,lw_en_s,data);
+	wr_data_sel wr_data_sel2(clk,data_out_r,data_mem,lw_en_s,data);
 	//第五级
 	receive #32 r_data(clk,data,data_r);
-	register register_cpu(clk,rs1,rs2,rd_s,data_r,wr_en_s,data1,data2);
+	register register_cpu(clk,rst,rs1,rs2,rd_s,data_r,wr_en_s,data1,data2);
 
 
 endmodule 

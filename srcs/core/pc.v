@@ -18,7 +18,7 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-//! 程序计数器，用于驱动指令地址（当碰到JAL指令时，打开跳转使能端口）
+//! 程序计数器，用于驱动指令地址（当碰到JAL指令时，打开跳转使能端口�?
 
 module pc(
     input clk,
@@ -28,9 +28,10 @@ module pc(
     output reg [31:0] addr=0
     );
     always@(negedge clk or posedge rst)
-    begin: counter
+    begin
         if(rst) addr<=0;
         else if(offset_en) addr<=offset;
+        else if(addr==8'd80) addr<=addr;
         else addr<=addr+1;
     end
 endmodule

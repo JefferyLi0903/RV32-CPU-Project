@@ -20,7 +20,6 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-
 module cpu_top(
 	input clk,
 	input rst,
@@ -43,6 +42,6 @@ module cpu_top(
 
 	blk_mem_gen_0 cpu_rom(clk,enable,addr,instr);
 	cpu cpu_cpu(clk,rst,instr,data_mem,addr,wr_addr_s,data2_s,lw_en_s,sw_en_s);
-	Data_mem cpu_ram(clk,wr_addr_s,data2_s,lw_en_s,sw_en_s,x1,x2,y1,y2,data_mem);
+	Data_mem cpu_ram(clk,rst,wr_addr_s,data2_s,lw_en_s,sw_en_s,x1,x2,y1,y2,data_mem);
 	
 endmodule 
