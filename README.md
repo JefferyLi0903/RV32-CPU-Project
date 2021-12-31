@@ -2,13 +2,13 @@
 现在的CPU设计可以支持如下指令: 
 
 ```assembly
-jal rd, imm; //x[rd]=pc+4; pc+=sext(offset)
 lw rd,rs1,imm; //x[rd]=sext(M[x[rs1]+sext(offset)])[31:0]
 sw rs1,rs2,imm; //M[x[rs1]+sext(offset)][31:0]=x[rs2]
 add rd,rs1,rs2; //x[rd]=x[rs1]+x[rs2]
 sub rd,rs1,rs2; //x[rd]=x[rs1]-x[rs2]
 mul rd,rs1,rs2; //x[rd]=x[rs1]*x[rs2]
-div rd,rs1,rs2; //x[rd]=x[rs1]/x[rs2]
+addi rd,rs1,imm; //x[rd]=x[rs1]+sext[imm]
+blt rs1,rs2,imm; //if(x[rs1]<x[rs2]) pc+=sext(offset)
 ```
 
 还有一些其他指令，我们或许用不到，在此不再列出。[^1]
