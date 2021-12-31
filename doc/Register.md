@@ -11,13 +11,13 @@
 | Port name | Direction | Type   | Description |
 | --------- | --------- | ------ | ----------- |
 | clk       | input     |        |             |
-| rs1       | input     | [4:0]  |             |
-| rs2       | input     | [4:0]  |             |
-| rd        | input     | [4:0]  |             |
-| wr_data   | input     | [31:0] |             |
-| wr_en     | input     |        |             |
-| data1     | output    | [31:0] |             |
-| data2     | output    | [31:0] |             |
+| rs1       | input     | [4:0]  |第一个读出数据地址             |
+| rs2       | input     | [4:0]  |第二个读出数据地址             |
+| rd        | input     | [4:0]  |写入数据地址             |
+| wr_data   | input     | [31:0] |写入数据             |
+| wr_en     | input     |        |写使能端口             |
+| data1     | output    | [31:0] |第一个读出数据             |
+| data2     | output    | [31:0] |第二个读出数据             |
 
 ## Signals
 
