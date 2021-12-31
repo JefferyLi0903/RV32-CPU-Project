@@ -21,9 +21,9 @@
 //! 数据选择器,在ALU的din2 之前使用.  
 
 module din_2_mux(
-    input [31:0] ext_imm,
-    input [31:0] din_2i,
-    output reg [31:0] din_2,
+    input [31:0] ext_imm, //! 请接入ext32模块
+    input [31:0] din_2i, //! 请接入寄存器模块
+    output reg [31:0] din_2, //!请接入RAM输入端口
     input sel, //! 请接入Instr第6位的非
     input clk
     );

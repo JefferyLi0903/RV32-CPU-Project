@@ -4,6 +4,7 @@
 ## Diagram
 
 ![Diagram](control.svg "Diagram")
+
 ## Description
 
 
@@ -13,7 +14,7 @@
 
 | Port name | Direction | Type   | Description                                 |
 | --------- | --------- | ------ | ------------------------------------------- |
-| instr     | input     | [31:0] |                                             |
+| instr     | input     | [31:0] | 接入指令                                        |
 | lw_en     | output    |        | 请接入RAM(data_mem)接口, 在高电平时inout接口处于读的状态      |
 | sw_en     | output    |        | 请接入RAM(data_mem)接口, 在高电平时inout接口处于写的状态      |
 | sub_en    | output    |        | 请接入ALU                                      |

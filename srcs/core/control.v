@@ -19,9 +19,9 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 `include "defs.v"
-//! 控制�?
+//! 控制器
 module control(
-    input [31:0] instr,
+    input [31:0] instr,//! 接入指令
     output lw_en,//! 请接入RAM(data_mem)接口, 在高电平时inout接口处于读的状态
     output sw_en,//! 请接入RAM(data_mem)接口, 在高电平时inout接口处于写的状态
     output sub_en,//! 请接入ALU
