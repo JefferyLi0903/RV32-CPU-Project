@@ -47,6 +47,8 @@ module transmission(
     begin
       if(rst)
         {y1,y2}<=0;
+      else if(x1)
+        {y1,y2}<={x1,x2}-32'd73741824;
       else
         {y1,y2}<={x1,x2};
     end

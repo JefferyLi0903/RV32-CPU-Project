@@ -27,7 +27,7 @@ module correct_out(
     input [3:0] y3,
     input [3:0] y4,
     input [3:0] y5,
-    input [3:0] x6,
+    input [3:0] y6,
     output reg x0,
     output reg [3:0] x1,
     output reg [3:0] x2,
@@ -38,7 +38,7 @@ module correct_out(
 
   always @(*)
   begin
-    if(x6>4'd4)
+    if(y6>4'd4)
     begin
       if(y5<4'd9)
       begin

@@ -21,7 +21,7 @@
 
 
 
-`define clk_period 2
+`define clk_period 20
 
 module sim();
 
