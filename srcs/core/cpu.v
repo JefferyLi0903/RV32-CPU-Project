@@ -75,30 +75,30 @@ module cpu(
 
 
 
-	//µÚÒ»¼¶
-	pc pc_cpu(clk,rst,offset_en_r,offset_r,addr);//È¡Ö¸¸üĞÂpc»ú
-	//µÚ¶ş¼¶
-	receive #32 r_instr(clk,instr,instr_r);//¼Ä´æÖ¸Áî
-	receive_en #(3,32) r_addr(clk,addr,offset_en,offset,addr_r);//¼Ä´æµØÖ·
-	decode decode_cpu(instr_r,imm,rs1,rs2,rd,op,func,op_2);//ÒëÂë
-	ext32 ext32_cpu(imm,ext_imm);//Á¢¼´ÊıÀ©Õ¹
-	control control_cpu(instr_r,lw_en,sw_en,sub_en,wr_en,offset_en,mux_sel);//²úÉúÊ¹ÄÜĞÅºÅ
-	din_2_mux din_2_mux_cpu(ext_imm,data2,data_in2,op[5],clk);//Êı¾İÑ¡Ôñ
-	exec exec_cpu(instr_r,addr_r,ext_imm,data1,data2,offset);//Éú³Éoffset
-	wr_addr wr_addr_cpu(clk,ext_imm,data1,wr_addr);//Éú³É¶ÁĞ´µØÖ·
+	//ç¬¬ä¸€çº§
+	pc pc_cpu(clk,rst,offset_en_r,offset_r,addr);//å–æŒ‡æ›´æ–°pcæœº
+	//ç¬¬äºŒçº§
+	receive #32 r_instr(clk,instr,instr_r);//å¯„å­˜æŒ‡ä»¤
+	receive_en #(3,32) r_addr(clk,addr,offset_en,offset,addr_r);//å¯„å­˜åœ°å€
+	decode decode_cpu(instr_r,imm,rs1,rs2,rd,op,func,op_2);//è¯‘ç 
+	ext32 ext32_cpu(imm,ext_imm);//ç«‹å³æ•°æ‰©å±•
+	control control_cpu(instr_r,lw_en,sw_en,sub_en,wr_en,offset_en,mux_sel);//äº§ç”Ÿä½¿èƒ½ä¿¡å·
+	din_2_mux din_2_mux_cpu(ext_imm,data2,data_in2,op[5],clk);//æ•°æ®é€‰æ‹©
+	exec exec_cpu(instr_r,addr_r,ext_imm,data1,data2,offset);//ç”Ÿæˆoffset
+	wr_addr wr_addr_cpu(clk,ext_imm,data1,wr_addr);//ç”Ÿæˆè¯»å†™åœ°å€
 	delay #7 d_op(clk,op,op_d);
 	delay #7 d_op2(clk,op_2,op2_d);
 	delay #32 d_data1(clk,data1,data1_d);
 	delay #32 d_data2(clk,data2,data2_d);
 	delay #3 d_func(clk,func,func_d);
 	delay #5 d_rd(clk,rd,rd_d);
-	//µÚÈı¼¶
+	//ç¬¬ä¸‰çº§
 	shift #(2,32) s_wr_addr(clk,wr_addr,wr_addr_s);
 	shift #(2,32) s_data2(clk,data2_d,data2_s);
 	shift #(2,1) s_lw_en(clk,lw_en,lw_en_s);
 	shift #(2,1) s_sw_en(clk,sw_en,sw_en_s);
 	shift #(3,5) s_rd(clk,rd_d,rd_s);
-	shift #(3,1) s_wr_en(clk,wr_en,wr_en_s);//ºóÃæÁ½¸öÖÜÆÚÓÃµ½µÄÊı¾İ
+	shift #(3,1) s_wr_en(clk,wr_en,wr_en_s);//åé¢ä¸¤ä¸ªå‘¨æœŸç”¨åˆ°çš„æ•°æ®
 	receive #1 r_offset_en(clk,offset_en,offset_en_r);
 	receive #7 r_op(clk,op_d,op_r);
 	receive #7 r_op_2(clk,op2_d,op2_r);
@@ -108,10 +108,10 @@ module cpu(
 	receive #3 r_func(clk,func_d,func_r);
 	receive #1 r_sub_en(clk,sub_en,sub_en_r);
 	ALU ALU(op_r,op2_r,func_r,sub_en_r,data1_r,data_in2_r,data_out);
-	//µÚËÄ¼¶
+	//ç¬¬å››çº§
 	receive #32 r_wr_data(clk,data_out,data_out_r);
 	wr_data_sel wr_data_sel2(clk,data_out_r,data_mem,lw_en_s,data);
-	//µÚÎå¼¶
+	//ç¬¬äº”çº§
 	receive #32 r_data(clk,data,data_r);
 	register register_cpu(clk,rst,rs1,rs2,rd_s,data_r,wr_en_s,data1,data2);
 

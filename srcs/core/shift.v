@@ -18,12 +18,15 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
+//! 类似FIFO，移位寄存器的功能
 
-
-module shift #(parameter M = 3, N = 32)(
-	input clk,
-	input [N-1:0]data,
-	output [N-1:0]data_s
+module shift #(parameter M = 3, //! FIFO深度
+				N = 32 //! FIFO宽度
+	)
+	(
+	input clk, //! 时钟信号
+	input [N-1:0]data, //! 输入数据用于缓存
+	output [N-1:0]data_s//! 输出数据
 );
 
 	reg [M*N-1:0]shift;

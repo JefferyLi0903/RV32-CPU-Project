@@ -18,13 +18,13 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
+//! 用于生成写入RAM的数据地址的模块
 
 module wr_addr(
-	input clk,
-	input [31:0]ext_imm,
-	input [31:0]data1,
-	output reg [31:0]wr_addr
+	input clk,//! 输入时钟
+	input [31:0]ext_imm, //! 地址偏置量offset
+	input [31:0]data1,//! 寄存器内的RAM指针
+	output reg [31:0]wr_addr//! 输出地址
 );
 
 	always@(negedge clk) wr_addr <= ext_imm + data1;

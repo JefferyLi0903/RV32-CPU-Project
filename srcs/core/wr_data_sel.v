@@ -18,14 +18,14 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
+//! 用于选择写入寄存器的数据
 
 module wr_data_sel(
-	input clk,
-	input [31:0]data_out,
-	input [31:0]data_mem,
-	input sel, //op[4]
-	output reg [31:0]wr_data
+	input clk, //! 输入时钟
+	input [31:0]data_out, //! 计算结果
+	input [31:0]data_mem, //! RAM中的值
+	input sel, //! op[4]
+	output reg [31:0]wr_data //! 待写入的数据
 );
 
 	always@(negedge clk) wr_data <= sel ? data_mem: data_out;
